@@ -1,0 +1,30 @@
+{
+    "Waren": [
+        {
+            "Id": "01",
+            "Name": "Einfacher Stuhl",
+            "Preis": 50.00
+        },
+        {
+            "Id": "02",
+            "Name": "Luxus Stuhl",
+            "Preis": 90.00
+        },
+        {
+            "Id": "03",
+            "Name": "Einfacher Tisch",
+            "Preis": 150.00
+        },
+        {
+            "Id": "04",
+            "Name": "Echtholz Tisch",
+            "Preis": 320.00
+        },
+        {
+            "Id": "05",
+            "Name": "Einfacher Schrank",
+            "Preis": 80.00
+        }
+    ]
+
+}
