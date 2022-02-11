@@ -1,3 +1,6 @@
+# Möbel Shop Kommandozeilenprogramm - deklarativ
+# Author: Florian Lorch
+
 import json
 import os
 # Funktion zum leeren der Kommandozeile
@@ -24,11 +27,10 @@ def main():
     i = 0
     while auswahl != "0":
         clear()
-        # Akutuelles Möbelstück
+        # Auswahl des aktuellen Möbelstück
         möbelstück = warenkatalog[i]
         # Anzeigen des Aktuellen Produkts
         print("Möbelstück:")
-
         print(json.dumps(möbelstück,indent=2))
 
         # Anzeigen der Auswahlmöglichkeiten
@@ -82,15 +84,20 @@ def main():
                     # Weniger mehr als ein mal -> Posten vermindern
                     else:
                         ware["Menge"] -= 1
-                    print("> Ware \"" + ware["Name"] + "\" aus Warenkorb entfernt.")
+                    print(
+                        "> Ware \"" +
+                        ware["Name"] +
+                        "\" aus Warenkorb entfernt."
+                    )
                     input()
 
         # Warenkorb Anzeigen 
         if auswahl == "4":
-            clear()
-            print("Warenkorb:")
-            print(json.dumps(warenkorb, indent=2))
-            input()
+            if warenkorb:
+                clear()
+                print("Warenkorb:")
+                print(json.dumps(warenkorb, indent=2))
+                input()
         
         # Bestellung abschließen
         if auswahl == "5":

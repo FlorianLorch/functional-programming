@@ -1,3 +1,6 @@
+# Möbel Shop Kommandozeilenprogramm - funktional
+# Author: Florian Lorch
+
 import json
 import os
 # Funktion zum leeren der Kommandozeile
@@ -19,9 +22,7 @@ def main():
     warenkatalog = json.loads(warendatei.read())["Waren"]
 
     warenkorb = []
-
     shop(warenkorb, warenkatalog, 0)
-
 
 def shop(warenkorb, warenkatalog, index):
     clear()
@@ -29,16 +30,18 @@ def shop(warenkorb, warenkatalog, index):
     # wird wieder am Anfang begonnen
     if index > len(warenkatalog) - 1:
         index = 0
-    
-    # Auswahl des aktuellen möbelstücks
+    # Auswahl des aktuellen Möbelstücks
     möbelstück = warenkatalog[index]
 
+    # Anzeigen des Aktuellen Produkts
+    print("Möbelstück:")
     print(json.dumps(möbelstück, indent=2)),
 
     # Anzeigen der Auswahlmöglichkeiten
     print("Optionen:")
     for nummer, auswahl in enumerate(auswahlmöglichkeiten):
         print(f"{nummer}. {auswahl}")
+
     # Eingabe der Auswahl
     auswahl = input("Auswahl: ")
 
@@ -69,6 +72,7 @@ def shop(warenkorb, warenkatalog, index):
     elif auswahl == "4":
         if warenkorb:
             menü(menü_warenkorb, warenkorb=warenkorb)
+        shop(warenkorb, warenkatalog, index)
 
     # Bestellung abschließen
     elif auswahl == "5":
@@ -80,6 +84,7 @@ def shop(warenkorb, warenkatalog, index):
     else:
         shop(warenkorb, warenkatalog, index)
     
+
 def hinzufügen(_warenkorb, möbelstück, möbelfilter):
     neu_warenkorb = _warenkorb
     # Falls die Ware bereits im Warenkorb vorhanden -> Posten erhöhen
@@ -102,6 +107,7 @@ def hinzufügen(_warenkorb, möbelstück, möbelfilter):
     print("> Ware \"" + möbelstück["Name"] + "\" zu Warenkorb hinzugefügt.")
     input()
     return neu_warenkorb
+
 
 def entfernen(_warenkorb, möbelfilter):
     neu_warenkorb = _warenkorb
@@ -136,6 +142,7 @@ def menü(menü_funktion, **parameter):
     result = menü_funktion(**parameter)
     input()
     return result
+
 
 def menü_warenkorb(**parameter):
     warenkorb = get_param("warenkorb", **parameter)
