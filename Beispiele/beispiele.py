@@ -49,7 +49,3 @@ print(verdoppeln(5))
 
 print(verdreifachen(5))
 
-x = [True,False]
-
-if False in x:
-    print("hi")

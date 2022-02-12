@@ -1,5 +1,5 @@
 # Möbel Shop Kommandozeilenprogramm - funktional
-# Author: Florian Lorch
+# Autor: Florian Lorch
 
 import json
 import os
@@ -21,8 +21,8 @@ def main():
     warendatei = open("Möbel-Shop\waren.json","r")
     warenkatalog = json.loads(warendatei.read())["Waren"]
 
-    warenkorb = []
-    shop(warenkorb, warenkatalog, 0)
+    # Aufruf der shop Funktion mit leerem warenkorb und erstem Artikel
+    shop([], warenkatalog, 0)
 
 def shop(warenkorb, warenkatalog, index):
     clear()
@@ -35,7 +35,7 @@ def shop(warenkorb, warenkatalog, index):
 
     # Anzeigen des Aktuellen Produkts
     print("Möbelstück:")
-    print(json.dumps(möbelstück, indent=2)),
+    print(json.dumps(möbelstück, indent=2))
 
     # Anzeigen der Auswahlmöglichkeiten
     print("Optionen:")
@@ -84,9 +84,8 @@ def shop(warenkorb, warenkatalog, index):
     else:
         shop(warenkorb, warenkatalog, index)
     
-
-def hinzufügen(_warenkorb, möbelstück, möbelfilter):
-    neu_warenkorb = _warenkorb
+def hinzufügen(warenkorb, möbelstück, möbelfilter):
+    neu_warenkorb = warenkorb
     # Falls die Ware bereits im Warenkorb vorhanden -> Posten erhöhen
     vorhanden = list(filter(möbelfilter, neu_warenkorb))
     
@@ -108,9 +107,8 @@ def hinzufügen(_warenkorb, möbelstück, möbelfilter):
     input()
     return neu_warenkorb
 
-
-def entfernen(_warenkorb, möbelfilter):
-    neu_warenkorb = _warenkorb
+def entfernen(warenkorb, möbelfilter):
+    neu_warenkorb = warenkorb
     vorhanden = list(filter(möbelfilter, neu_warenkorb))
 
     # Falls die Ware bereits im Warenkorb vorhanden
@@ -123,6 +121,8 @@ def entfernen(_warenkorb, möbelfilter):
             ware["Menge"] -= 1
         print("> Ware \"" + ware["Name"] + "\" aus Warenkorb entfernt.")
     list(map(entfernen_warenkorb, vorhanden))
+    if not vorhanden:
+        return neu_warenkorb
     input()
     return neu_warenkorb
 
@@ -143,13 +143,11 @@ def menü(menü_funktion, **parameter):
     input()
     return result
 
-
 def menü_warenkorb(**parameter):
     warenkorb = get_param("warenkorb", **parameter)
     
     print("Warenkorb:")
     print(json.dumps(warenkorb, indent=2))
-
 
 def menü_bestellung(**parameter):
     warenkorb = get_param("warenkorb", **parameter)
@@ -165,11 +163,10 @@ def menü_bestellung(**parameter):
     warenkorb = []
     return warenkorb
 
-
 def get_param(name, **parameter):
-    for param in parameter: 
-        if param == name:
-            return parameter[param]
+    # Nach ausgewähltem Parameter filtern
+    param = list(filter(lambda x: x == name, parameter))
+    return parameter[param[0]]
 
 if __name__ == "__main__":
     main()

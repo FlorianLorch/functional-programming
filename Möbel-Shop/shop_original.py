@@ -1,5 +1,5 @@
 # Möbel Shop Kommandozeilenprogramm - deklarativ
-# Author: Florian Lorch
+# Autor: Florian Lorch
 
 import json
 import os
@@ -81,7 +81,7 @@ def main():
                     # Weniger als zwei mal -> Posten löschen
                     if ware["Menge"] < 2:
                         warenkorb.remove(ware)
-                    # Weniger mehr als ein mal -> Posten vermindern
+                    # Mehr als ein mal -> Posten vermindern
                     else:
                         ware["Menge"] -= 1
                     print(
