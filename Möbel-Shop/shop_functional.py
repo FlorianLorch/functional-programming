@@ -65,7 +65,7 @@ def shop(warenkorb, warenkatalog, index):
 
     # Aus Warenkorb entfernen
     elif auswahl == "3":
-        neu_warenkorb = entfernen(warenkorb, möbelfilter)
+        neu_warenkorb = entfernen(warenkorb, möbelfilter, möbelstück)
         shop(neu_warenkorb, warenkatalog, index)
 
     # Warenkorb Anzeigen 
@@ -107,7 +107,7 @@ def hinzufügen(warenkorb, möbelstück, möbelfilter):
     input()
     return neu_warenkorb
 
-def entfernen(warenkorb, möbelfilter):
+def entfernen(warenkorb, möbelfilter, möbelstück):
     neu_warenkorb = warenkorb
     vorhanden = list(filter(möbelfilter, neu_warenkorb))
 
@@ -119,6 +119,7 @@ def entfernen(warenkorb, möbelfilter):
         # Mehr als ein mal -> Posten vermindern
         else:
             ware["Menge"] -= 1
+            ware["Kosten"] -= möbelstück["Preis"]
         print("> Ware \"" + ware["Name"] + "\" aus Warenkorb entfernt.")
     list(map(entfernen_warenkorb, vorhanden))
     if not vorhanden:

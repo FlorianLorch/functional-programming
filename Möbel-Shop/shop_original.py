@@ -84,6 +84,7 @@ def main():
                     # Mehr als ein mal -> Posten vermindern
                     else:
                         ware["Menge"] -= 1
+                        ware["Kosten"] -= möbelstück["Preis"]
                     print(
                         "> Ware \"" +
                         ware["Name"] +
