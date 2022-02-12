@@ -39,8 +39,7 @@ def shop(warenkorb, warenkatalog, index):
 
     # Anzeigen der Auswahlmöglichkeiten
     print("Optionen:")
-    for nummer, auswahl in enumerate(auswahlmöglichkeiten):
-        print(f"{nummer}. {auswahl}")
+    list(map(lambda x: print(f"{x[0]}. {x[1]}"), enumerate(auswahlmöglichkeiten)))
 
     # Eingabe der Auswahl
     auswahl = input("Auswahl: ")
@@ -153,21 +152,23 @@ def menü_warenkorb(**parameter):
 def menü_bestellung(**parameter):
     warenkorb = get_param("warenkorb", **parameter)
     print("Bestellt:")
-    total = 0
-    for ware in warenkorb:
+
+    def waren_anzeigen(ware):
         name = ware["Name"]
         menge = ware["Menge"]
         kosten = ware["Kosten"]
         print(f"\n{name} (x{menge}) -> Preis: {kosten}")
-        total += kosten
+        return kosten
+    total = sum(list(map(waren_anzeigen, warenkorb)))
+
     print(f"Total: {total}")
     warenkorb = []
     return warenkorb
 
 def get_param(name, **parameter):
     # Nach ausgewähltem Parameter filtern
-    param = list(filter(lambda x: x == name, parameter))
-    return parameter[param[0]]
+    param = list(filter(lambda x: x == name, parameter))[0]
+    return parameter[param]
 
 if __name__ == "__main__":
     main()

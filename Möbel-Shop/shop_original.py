@@ -51,7 +51,8 @@ def main():
         # Zu Warenkorb hinzufügen
         if auswahl == "2":
             vorhanden = False
-            # Falls die Ware bereits im Warenkorb vorhanden -> Posten erhöhen
+            # Falls die Ware bereits im Warenkorb vorhanden 
+            # -> Posten erhöhen
             for ware in warenkorb:
                 if ware["Id"] == möbelstück["Id"]:
                     vorhanden = True         
