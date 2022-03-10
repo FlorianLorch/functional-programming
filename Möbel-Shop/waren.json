@@ -24,6 +24,11 @@
             "Id": "05",
             "Name": "Einfacher Schrank",
             "Preis": 80.00
+        },
+        {
+            "Id": "06",
+            "Name": "Fliesentisch",
+            "Preis": 999.00
         }
     ]
 
